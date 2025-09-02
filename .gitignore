@@ -1,0 +1,14 @@
+# Node
+node_modules/
+**/node_modules/
+*.log
+.env
+.DS_Store
+# Build
+frontend/dist/
+frontend/.vite/
+# SQLite DB
+backend/database.sqlite
+# Editor
+.vscode/
+.idea/
