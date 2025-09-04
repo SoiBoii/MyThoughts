@@ -19,7 +19,8 @@ function CreateArticle() {
         if (!title.trim() || !content.trim() || !category.trim()) return;
         const newArticle = { title, author, content, summary, category, imageUrl, tags, publishedAt: publishedAt || undefined };
         setSubmitting(true);
-        axios.post('http://localhost:5001/api/articles/add', newArticle)
+        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+        axios.post(`${apiUrl}/api/articles/add`, newArticle)
             .then(res => {
                 navigate('/');
             })
@@ -66,7 +67,8 @@ function CreateArticle() {
                 <div className="form-group">
                     <button type="button" className="btn" onClick={async () => {
                         try {
-                            const r = await axios.post('http://localhost:5001/api/articles/_ai/suggest', { title, content });
+                            const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+                            const r = await axios.post(`${apiUrl}/api/articles/_ai/suggest`, { title, content });
                             setSummary(prev => prev || r.data.summary || '');
                             setTags(prev => prev || r.data.tags || '');
                         } catch (e) { console.error(e); }

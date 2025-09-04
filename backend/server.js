@@ -7,6 +7,11 @@ const { Sequelize } = require('sequelize');
 const app = express();
 const port = process.env.PORT || 5001;
 
+// Add health check endpoint
+app.get('/health', (req, res) => {
+    res.json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
 // Middleware
 app.use(cors());
 app.use(express.json());

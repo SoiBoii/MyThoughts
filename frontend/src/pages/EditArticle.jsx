@@ -13,7 +13,8 @@ function EditArticle() {
     const [saving, setSaving] = useState(false);
 
     useEffect(() => {
-        axios.get(`http://localhost:5001/api/articles/${id}`)
+        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+        axios.get(`${apiUrl}/api/articles/${id}`)
             .then(res => {
                 const a = res.data;
                 setTitle(a.title || '');
@@ -29,7 +30,8 @@ function EditArticle() {
         e.preventDefault();
         if (!title.trim() || !content.trim() || !category.trim()) return;
         setSaving(true);
-        axios.put(`http://localhost:5001/api/articles/${id}` , {
+        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+        axios.put(`${apiUrl}/api/articles/${id}` , {
             title, content, category, publishedAt: publishedAt || undefined
         }).then(() => navigate(`/article/${id}`))
           .catch(err => console.error(err))

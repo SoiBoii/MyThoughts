@@ -16,7 +16,8 @@ function ArticleList() {
     const fetchArticles = () => {
         setLoading(true);
         const params = { q, category, page, pageSize, sortBy: 'publishedAt', sortDir: 'DESC' };
-        axios.get('http://localhost:5001/api/articles', { params })
+        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+        axios.get(`${apiUrl}/api/articles`, { params })
             .then(response => {
                 setArticles(response.data.data);
                 setTotal(response.data.total);
@@ -33,8 +34,9 @@ function ArticleList() {
     }, [q, category, page, pageSize]);
 
     useEffect(() => {
-        axios.get('http://localhost:5001/api/articles/_meta/trending').then(r => setTrending(r.data));
-        axios.get('http://localhost:5001/api/articles/_meta/categories').then(r => setCategories(r.data));
+        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+        axios.get(`${apiUrl}/api/articles/_meta/trending`).then(r => setTrending(r.data));
+        axios.get(`${apiUrl}/api/articles/_meta/categories`).then(r => setCategories(r.data));
     }, []);
 
     const totalPages = Math.max(Math.ceil(total / pageSize), 1);

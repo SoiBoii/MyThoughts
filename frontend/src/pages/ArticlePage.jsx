@@ -9,10 +9,11 @@ function ArticlePage() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get(`http://localhost:5001/api/articles/${id}`)
+        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+        axios.get(`${apiUrl}/api/articles/${id}`)
             .then(response => {
                 setArticle(response.data);
-                axios.post(`http://localhost:5001/api/articles/${id}/view`).catch(() => {});
+                axios.post(`${apiUrl}/api/articles/${id}/view`).catch(() => {});
             })
             .catch(error => {
                 console.error('There was an error fetching the article!', error);
@@ -42,7 +43,8 @@ function ArticlePage() {
                         if (!confirm('Delete this article?')) return;
                         try {
                             setDeleting(true);
-                            await axios.delete(`http://localhost:5001/api/articles/${id}`);
+                            const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+                            await axios.delete(`${apiUrl}/api/articles/${id}`);
                             navigate('/');
                         } catch (e) {
                             console.error(e);
