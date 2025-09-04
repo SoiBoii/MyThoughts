@@ -5,6 +5,11 @@ A full-stack news/blog application with a modern UI, search/filter/sort/paginati
 - Frontend: React + Vite
 - Backend: Node.js + Express + Sequelize (SQLite)
 
+## 🚀 Live Demo
+**Frontend**: [https://soiboii.github.io/MyThoughts/](https://soiboii.github.io/MyThoughts/)
+
+*Note: The live demo is frontend-only. For full functionality, run the backend locally.*
+
 ## Features
 - Modern news layout: hero, grid cards with images, trending sidebar, categories chips
 - Article CRUD: create, read, update, delete
@@ -97,8 +102,17 @@ Frontend:
 - `npm run preview` — preview build
 
 ## Deployment
+
+### GitHub Pages (Frontend)
+The frontend is automatically deployed to GitHub Pages on every push to `main`:
+- **Live URL**: https://soiboii.github.io/MyThoughts/
+- **Auto-deployment**: GitHub Action builds and deploys on push
+- **Configuration**: Vite config set with `base: '/MyThoughts/'`
+
+### Backend Deployment
 - Backend can run anywhere Node 18+ is available. Persist `database.sqlite` or switch Sequelize to another dialect.
-- Frontend can be built and hosted on any static host (e.g., GitHub Pages, Netlify, Vercel). Configure API URL if backend is remote.
+- For production, consider using services like Railway, Render, or Heroku.
+- Update frontend API URL in production builds if backend is hosted separately.
 
 ## License
 MIT
